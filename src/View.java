@@ -13,9 +13,9 @@ import java.awt.event.ActionListener;
  * TODO: Write more actionListeners and wire the rest of the buttons
  **/
 
-public class View extends JFrame{
-    // The controller member
-    VehicleController carC;
+public class View extends JFrame implements SimulationListener{
+
+    private final VehicleControllerListener controllerListener;
 
     DrawPanel drawPanel = new DrawPanel(WindowConfig.SCREEN_WIDTH, WindowConfig.SCREEN_HEIGHT - WindowConfig.BUTTON_HEIGHT);
 
@@ -74,17 +74,17 @@ public class View extends JFrame{
 
         this.add(gasPanel);
 
-        controlPanel.setLayout(new GridLayout(2,4));
+        controlPanel.setLayout(new GridLayout(2,4));  //**
 
-        controlPanel.add(gasButton, 0);
-        controlPanel.add(turboOnButton, 1);
-        controlPanel.add(liftBedButton, 2);
-        controlPanel.add(brakeButton, 3);
-        controlPanel.add(turboOffButton, 4);
-        controlPanel.add(lowerBedButton, 5);
-        controlPanel.setPreferredSize(new Dimension((WindowConfig.SCREEN_WIDTH/2)+4, 200));
-        this.add(controlPanel);
-        controlPanel.setBackground(Color.CYAN);
+        controlPanel.add(gasButton, 0); //**
+        controlPanel.add(turboOnButton, 1);//**
+        controlPanel.add(liftBedButton, 2);//**
+        controlPanel.add(brakeButton, 3);//**
+        controlPanel.add(turboOffButton, 4);//**
+        controlPanel.add(lowerBedButton, 5);//**
+        controlPanel.setPreferredSize(new Dimension((WindowConfig.SCREEN_WIDTH/2)+4, 200));//**
+        this.add(controlPanel);//**
+        controlPanel.setBackground(Color.CYAN); //**
 
 
         startButton.setBackground(Color.blue);

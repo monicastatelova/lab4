@@ -72,20 +72,20 @@ public class VehicleController {
         }
     }
 
-    void stopAllCars(){
+    public void stopAllCars(){
         for (Vehicle vehicle : vehicles) {
             vehicle.stopEngine();
         }
     }
 
-    void liftBed(){
+    public void liftBed(){
         for (Vehicle vehicle : vehicles) {
             if (vehicle instanceof Truck)
                 ((Truck) vehicle).setIsLiftUp(true);
         }
     }
 
-    void lowerBed(){
+    public void lowerBed(){
         for (Vehicle vehicle : vehicles) {
             if (vehicle instanceof Truck)
                 ((Truck) vehicle).setIsLiftUp(false);
