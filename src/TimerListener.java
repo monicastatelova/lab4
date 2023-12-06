@@ -2,7 +2,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class TimerListener implements ActionListener {
+public class TimerListener implements ActionListener { //ändra namn
 
     View frame;
     ArrayList<Vehicle> vehicles = new ArrayList<>();
@@ -30,8 +30,7 @@ public class TimerListener implements ActionListener {
                 vehicle.move();
                 xCoordinates[i] = (int) Math.round(vehicle.getXPos());
                 yCoordinates[i] = (int) Math.round(vehicle.getYPos());
-                frame.drawPanel.moveit(xCoordinates, yCoordinates);
-                frame.drawPanel.repaint();
+                frame.updateSimulation(xCoordinates, yCoordinates);
             }
         }
     }
