@@ -1,11 +1,18 @@
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class VehicleController implements VehicleControllerListener {
-    ArrayList<Vehicle> vehicles = new ArrayList<>();
+public class EmelieVehicleController implements VehicleControllerListener, View {
+    public ArrayList<Vehicle> vehicles = new ArrayList<>();
+
+    private JPanel controlPanel = new JPanel();
+
+    private JSpinner gasSpinner;
+    private int gasAmount = 0;
 
     private JButton gasButton = new JButton("Gas");
     private JButton brakeButton = new JButton("Brake");
@@ -15,23 +22,58 @@ public class VehicleController implements VehicleControllerListener {
     private JButton lowerBedButton = new JButton("Lower Lift Bed");
     private JButton startButton = new JButton("Start all cars");
     private JButton stopButton = new JButton("Stop all cars");
+    private View view;
 
-    public VehicleController() {
-        setupEventListeners();
+    public VehicleController(View view) {
+        this.view = view;
+        initializeComponents();
     }
 
-    private void setupEventListeners() {
+
+
+
+    private void initializeComponents() {
+        SpinnerModel spinnerModel = new SpinnerNumberModel(0, 0, 100, 1);
+        gasSpinner = new JSpinner(spinnerModel);
+        gasSpinner.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent e) {
+                gasAmount = (int) gasSpinner.getValue();
+            }
+        });
+
+        controlPanel.setLayout(new GridLayout(2, 4));
+        controlPanel.add(gasSpinner);
+        controlPanel.add(turboOnButton);
+        controlPanel.add(liftBedButton);
+        controlPanel.add(brakeButton);
+        controlPanel.add(turboOffButton);
+        controlPanel.add(lowerBedButton);
+        controlPanel.setPreferredSize(new Dimension((WindowConfig.SCREEN_WIDTH / 2) + 4, 200));
+        controlPanel.setBackground(Color.CYAN);
+
+        startButton.setBackground(Color.blue);
+        startButton.setForeground(Color.green);
+        startButton.setPreferredSize(new Dimension(WindowConfig.SCREEN_WIDTH / 5 - 15, 200));
+
+        stopButton.setBackground(Color.red);
+        stopButton.setForeground(Color.black);
+        stopButton.setPreferredSize(new Dimension(WindowConfig.SCREEN_WIDTH / 5 - 15, 200));
+
+        view.add(controlPanel);
+        view.add(startButton);
+        view.add(stopButton);
+
         gasButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                gas(getSpeedChange());
+                gas(gasAmount);
             }
         });
 
         brakeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                brake(getSpeedChange());
+                brake(gasAmount);
             }
         });
 
@@ -49,20 +91,6 @@ public class VehicleController implements VehicleControllerListener {
             }
         });
 
-        liftBedButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                liftBed();
-            }
-        });
-
-        lowerBedButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                lowerBed();
-            }
-        });
-
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -76,65 +104,37 @@ public class VehicleController implements VehicleControllerListener {
                 stopAllCars();
             }
         });
-    }
 
-    public JButton getGasButton() {
-        return gasButton;
-    }
+        liftBedButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                liftBed();
+            }
+        });
 
-    public JButton getBrakeButton() {
-        return brakeButton;
-    }
-
-    public JButton getTurboOnButton() {
-        return turboOnButton;
-    }
-
-    public JButton getTurboOffButton() {
-        return turboOffButton;
-    }
-
-    public JButton getLiftBedButton() {
-        return liftBedButton;
-    }
-
-    public JButton getLowerBedButton() {
-        return lowerBedButton;
-    }
-
-    public JButton getStartButton() {
-        return startButton;
-    }
-
-    public JButton getStopButton() {
-        return stopButton;
-    }
-
-    public void setVehicles(ArrayList<Vehicle> vehicles) {
-        this.vehicles = vehicles;
-    }
-
-    public int getSpeedChange() {
-        return View.getGasAmount();
+        lowerBedButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                lowerBed();
+            }
+        });
     }
 
     public void gas(int amount) {
         double gas = ((double) amount) / 100;
-        for (Vehicle vehicle : vehicles
-        ) {
+        for (Vehicle vehicle : vehicles) {
             vehicle.gas(gas);
         }
     }
 
     public void brake(int amount) {
         double brake = ((double) amount) / 100;
-        for (Vehicle vehicle : vehicles
-        ) {
+        for (Vehicle vehicle : vehicles) {
             vehicle.brake(brake);
         }
     }
 
-    public void turboOn(){
+    public void turboOn() {
         for (Vehicle vehicle : vehicles) {
             if (vehicle instanceof Saab95) {
                 ((Saab95) vehicle).setTurboOn();
@@ -142,7 +142,7 @@ public class VehicleController implements VehicleControllerListener {
         }
     }
 
-    public void turboOff(){
+    public void turboOff() {
         for (Vehicle vehicle : vehicles) {
             if (vehicle instanceof Saab95) {
                 ((Saab95) vehicle).setTurboOff();
@@ -150,30 +150,31 @@ public class VehicleController implements VehicleControllerListener {
         }
     }
 
-    public void startAllCars(){
+    public void startAllCars() {
         for (Vehicle vehicle : vehicles) {
             vehicle.startEngine();
         }
     }
 
-    public void stopAllCars(){
+    public void stopAllCars() {
         for (Vehicle vehicle : vehicles) {
             vehicle.stopEngine();
         }
     }
 
-    public void liftBed(){
+    public void liftBed() {
         for (Vehicle vehicle : vehicles) {
-            if (vehicle instanceof Truck)
+            if (vehicle instanceof Truck) {
                 ((Truck) vehicle).setIsLiftUp(true);
+            }
         }
     }
 
-    public void lowerBed(){
+    public void lowerBed() {
         for (Vehicle vehicle : vehicles) {
-            if (vehicle instanceof Truck)
+            if (vehicle instanceof Truck) {
                 ((Truck) vehicle).setIsLiftUp(false);
+            }
         }
     }
-
 }
