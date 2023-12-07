@@ -1,198 +1,45 @@
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.awt.*;
 
 public class View extends JFrame implements SimulationObserver {
-
     private final VehicleController controller;
-    private Model model;
-    private static int gasAmount;
-    private DrawPanel drawPanel = new DrawPanel(WindowConfig.SCREEN_WIDTH, WindowConfig.SCREEN_HEIGHT - WindowConfig.BUTTON_HEIGHT);
+    private final DrawPanel drawPanel;
+    private final JLabel gasLabel = new JLabel("Amount of gas");
 
-    JPanel controlPanel = new JPanel(); //**
-
-    JPanel gasPanel = new JPanel(); //**
-    JSpinner gasSpinner = new JSpinner(); //**
-
-    JLabel gasLabel = new JLabel("Amount of gas"); //**
-
-    JButton gasButton = new JButton("Gas"); //**
-    JButton brakeButton = new JButton("Brake"); //**
-    JButton turboOnButton = new JButton("Saab Turbo on"); //**
-    JButton turboOffButton = new JButton("Saab Turbo off"); //**
-    JButton liftBedButton = new JButton("Scania Lift Bed"); //**
-    JButton lowerBedButton = new JButton("Lower Lift Bed"); //**
-
-    JButton startButton = new JButton("Start all cars"); //**
-    JButton stopButton = new JButton("Stop all cars"); //**
-
-    // Constructor
     public View(Model model, VehicleController controller){
         this.controller = controller;
-        this.model = model;
-        initComponents("Car Application");
-    }
-
-    static int getGasAmount() {
-        return gasAmount;
+        //Initialiserar en panel med dimensioner för att rita fordonen
+        this.drawPanel = new DrawPanel(WindowConfig.SCREEN_WIDTH, WindowConfig.SCREEN_HEIGHT - WindowConfig.BUTTON_HEIGHT);
+        //Initialiserar komponenterna i gränssnittet
+        initComponents("Vehicle Simulation");
     }
 
     @Override
-    public void updateSimulation(int[] xCoordinates, int[] yCoordinates) {
+    public void updateSimulation(double[] xCoordinates, double[] yCoordinates) {
+        //Uppdatera ritpanelen med nya koordinater och uppdatera gränssnittet
         drawPanel.moveit(xCoordinates, yCoordinates);
         drawPanel.repaint();
     }
-
 
     private void initComponents(String title) {
         this.setTitle(title);
         this.setPreferredSize(new Dimension(WindowConfig.SCREEN_WIDTH, WindowConfig.SCREEN_HEIGHT));
         this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 
-        this.add(drawPanel);
-
-        SpinnerModel spinnerModel = //**
-                new SpinnerNumberModel(0, //initial value //**
-                        0, //min //**
-                        100, //max //**
-                        1);//step //**
-        gasSpinner = new JSpinner(spinnerModel); //**
-        gasSpinner.addChangeListener(new ChangeListener() { //**
-            public void stateChanged(ChangeEvent e) { //**
-                gasAmount = (int) ((JSpinner)e.getSource()).getValue();//**
-
-            }
-        });
-
-
-        gasPanel.setLayout(new BorderLayout());//**
-        gasPanel.add(gasLabel, BorderLayout.PAGE_START);//**
-        gasPanel.add(gasSpinner, BorderLayout.PAGE_END);//**
-
-        this.add(gasPanel);//**
-
-        controlPanel.setLayout(new GridLayout(2,4)); //**
-
-        controlPanel.add(gasButton, 0);//**
-        controlPanel.add(turboOnButton, 1);//**
-        controlPanel.add(liftBedButton, 2);//**
-        controlPanel.add(brakeButton, 3);//**
-        controlPanel.add(turboOffButton, 4);//**
-        controlPanel.add(lowerBedButton, 5);//**
-        controlPanel.setPreferredSize(new Dimension((WindowConfig.SCREEN_WIDTH/2)+4, 200));//**
-        this.add(controlPanel);//**
-        controlPanel.setBackground(Color.CYAN);//**
-
-
-        startButton.setBackground(Color.blue);//**
-        startButton.setForeground(Color.green);//**
-        startButton.setPreferredSize(new Dimension(WindowConfig.SCREEN_WIDTH/5-15,200)); //**
-        this.add(startButton); //**
-
-
-        stopButton.setBackground(Color.red);//**
-        stopButton.setForeground(Color.black);//**
-        stopButton.setPreferredSize(new Dimension(WindowConfig.SCREEN_WIDTH/5-15,200)); //**
-        this.add(stopButton);//**
-
-        gasButton.addActionListener(e -> model.gas(getGasAmount()));
-        brakeButton.addActionListener(e -> model.brake(getGasAmount()));
-        turboOnButton.addActionListener(e -> model.turboOn());
-        turboOffButton.addActionListener(e -> model.turboOff());
-        startButton.addActionListener(e -> model.startAllCars());
-        stopButton.addActionListener(e -> model.stopAllCars());
-        liftBedButton.addActionListener(e -> model.liftBed());
-        lowerBedButton.addActionListener(e -> model.lowerBed());
-
-        // Make the frame pack all it's components by respecting the sizes if possible.
-        this.pack();
-
-        // Get the computer screen resolution
-        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        // Center the frame
-        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
-        // Make the frame visible
-        this.setVisible(true);
-        // Make sure the frame exits when "x" is pressed
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    }
-}
-
-
-/*
-package Application.View;
-import java.awt.Dimension;
-
-import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-
-import Application.Controller.Controller;
-import Application.Model.Model;
-import Application.Observer.Events;
-import Application.Observer.IObserver;
-import Application.Observer.ModelObserver;
-
-import java.awt.*;
-
-public class View extends JFrame implements ModelObserver, IObserver{
-
-    private JPanel controlPanel;
-    private JPanel gasPanel;
-    private Model model;
-
-    private static final int X = 800;
-    private static final int Y = 800;
-    private DrawPanel drawPanel;
-
-    private Controller controller;
-    private JLabel gasLabel = new JLabel("Amount of gas");
-
-    public View(Controller controller, Model model) {
-        this.model = model;
-        this.controller = controller;
-        this.drawPanel = new DrawPanel(X, Y-240, this.model);
-        this.initComponents("Car Application");
-    }
-
-    @Override
-    public void handleEvent(Events.Event e){
-        switch (e) {
-            case UPDATESCREEN:
-                this.update();
-                break;
-            default:
-                break;
-        }
-    }
-
-    @Override
-    public void update(){
-        this.setVisible(true);
-        this.repaint();
-    }
-
-    private void initComponents(String title) {
-        this.setTitle(title);
-        this.setPreferredSize(new Dimension(X,Y));
-        this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
-
+        //Lägger till ritpanelen till fönstret
         this.add(this.drawPanel);
 
-        this.gasPanel = controller.createGasPanel(gasLabel);
-
+        //Skapar och lägger till gaspanelen till fönstret
+        JPanel gasPanel = controller.createGasPanel(gasLabel);
         this.add(gasPanel);
 
-        controlPanel = controller.createControlPanel(X);
-
+        //Skapar och lägger till kontrollpanelen till fönstret med knappar
+        JPanel controlPanel = controller.createControlPanel();
         this.add(controlPanel);
-        controlPanel.setBackground(Color.CYAN);
 
-        this.add(controller.setupStartButton(X));
-
-        this.add(controller.setupStopButton(X));
-
+        //Lägger till start- och stoppknappar till fönstret
+        this.add(controller.createStartButton());
+        this.add(controller.createStopButton());
 
         // Make the frame pack all it's components by respecting the sizes if possible.
         this.pack();
@@ -207,4 +54,3 @@ public class View extends JFrame implements ModelObserver, IObserver{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 }
- */

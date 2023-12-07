@@ -3,8 +3,8 @@ import java.util.List;
 
 public class CarWorkshop <T extends Car>{//T är av typen Car
 
-    private int maxCapacity;
-    private List<T> carsInWorkshop;
+    private final int maxCapacity;
+    private final List<T> carsInWorkshop;
 
     public CarWorkshop(int maxCapacity){
         this.maxCapacity = maxCapacity;

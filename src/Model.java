@@ -5,17 +5,18 @@ import javax.swing.Timer;
 import java.util.List;
 
 public class Model {
-    private List<Vehicle> vehicles;
-    private List<SimulationObserver> observers;
+    private final List<Vehicle> vehicles;
+    private final List<SimulationObserver> observers;
     private Timer timer;
 
     public Model() {
         this.vehicles = new ArrayList<>();
-        this.observers = new ArrayList<>();
+        this.observers = new ArrayList<>(); //observatörer
         initializeTimer();
     }
 
     private void initializeTimer() {
+        //Skapar och startar en timer för att regelbundet uppdatera fordonens positioner
         int delay = 50;
         ActionListener taskPerformer = new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -27,22 +28,27 @@ public class Model {
     }
 
     public void addObserver(SimulationObserver observer) {
+        //Lägger till observatör till listan
         observers.add(observer);
     }
 
-    private void notifyObservers(int[] xCoordinates, int[] yCoordinates) {
+    private void notifyObservers(double[] xCoordinates, double[] yCoordinates) {
+        //Meddelar alla observatörer om uppdaterade koordinater
         for (SimulationObserver observer : observers) {
             observer.updateSimulation(xCoordinates, yCoordinates);
         }
     }
 
+
     public void addVehicle(Vehicle vehicle) {
+        //Lägger till ett fordon till listan
         vehicles.add(vehicle);
     }
 
     public void updateVehiclePositions() {
-        int[] xCoordinates = new int[vehicles.size()];
-        int[] yCoordinates = new int[vehicles.size()];
+        //Uppdaterar positionerna för alla fordon
+        double[] xCoordinates = new double[vehicles.size()];
+        double[] yCoordinates = new double[vehicles.size()];
 
         for (int i = 0; i < vehicles.size(); i++) {
             Vehicle vehicle = vehicles.get(i);
@@ -53,11 +59,11 @@ public class Model {
             }
 
             vehicle.move();
-            xCoordinates[i] = (int) Math.round(vehicle.getXPos());
-            yCoordinates[i] = (int) Math.round(vehicle.getYPos());
+            xCoordinates[i] = Math.round(vehicle.getXPos());
+            yCoordinates[i] = Math.round(vehicle.getYPos());
         }
 
-        // Notify the view to update the simulation with new coordinates
+        //Notify the view to update the simulation with new coordinates
         notifyObservers(xCoordinates, yCoordinates);
     }
 
@@ -70,6 +76,7 @@ public class Model {
     }
 
     private void handleHitWall(Vehicle vehicle, double initialSpeed) {
+        //Hanterar kollision med väggen
         vehicle.stopEngine();
         vehicle.turnRight();
         vehicle.turnRight();
@@ -78,15 +85,12 @@ public class Model {
     }
 
     private boolean hitWall(Vehicle vehicle) {
+        //Kontrollerar om fordonet kolliderar med väggen
         int screenWidth = WindowConfig.SCREEN_WIDTH - WindowConfig.VEHICLE_WIDTH;
         int screenHeight = WindowConfig.SCREEN_HEIGHT;
         double vehicleXPos = vehicle.getXPos();
         double vehicleYPos = vehicle.getYPos();
         return (vehicleXPos < 0 || vehicleXPos > screenWidth || vehicleYPos < 0 || vehicleYPos > screenHeight);
-    }
-
-    public Timer getTimer() {
-        return timer;
     }
 
     public void gas(int amount) {

@@ -4,7 +4,7 @@ import java.util.List;
 
 public class CarTransporter extends Truck{
 
-    private List<Car> loadedCars;
+    private final List<Car> loadedCars;
 
     public CarTransporter() {
         super(2, 500, Color.green, 20.0, false);

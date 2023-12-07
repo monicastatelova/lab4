@@ -1,3 +1,3 @@
 public interface SimulationObserver {
-    void updateSimulation(int[] xCoordinates, int[] yCoordinates);
+    void updateSimulation(double[] xCoordinates, double[] yCoordinates);
 }
