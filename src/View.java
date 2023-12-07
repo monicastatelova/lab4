@@ -5,13 +5,10 @@ import java.awt.*;
 
 public class View extends JFrame implements SimulationObserver {
 
-    private final VehicleControllerListener controllerListener;
-
+    private final VehicleController controller;
     private Model model;
-
     private static int gasAmount;
-
-    DrawPanel drawPanel = new DrawPanel(WindowConfig.SCREEN_WIDTH, WindowConfig.SCREEN_HEIGHT - WindowConfig.BUTTON_HEIGHT);
+    private DrawPanel drawPanel = new DrawPanel(WindowConfig.SCREEN_WIDTH, WindowConfig.SCREEN_HEIGHT - WindowConfig.BUTTON_HEIGHT);
 
     JPanel controlPanel = new JPanel(); //**
 
@@ -31,8 +28,8 @@ public class View extends JFrame implements SimulationObserver {
     JButton stopButton = new JButton("Stop all cars"); //**
 
     // Constructor
-    public View(Model model, VehicleControllerListener controllerListener){
-        this.controllerListener = controllerListener;
+    public View(Model model, VehicleController controller){
+        this.controller = controller;
         this.model = model;
         initComponents("Car Application");
     }
@@ -49,14 +46,11 @@ public class View extends JFrame implements SimulationObserver {
 
 
     private void initComponents(String title) {
-
         this.setTitle(title);
         this.setPreferredSize(new Dimension(WindowConfig.SCREEN_WIDTH, WindowConfig.SCREEN_HEIGHT));
         this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 
         this.add(drawPanel);
-
-
 
         SpinnerModel spinnerModel = //**
                 new SpinnerNumberModel(0, //initial value //**
@@ -124,3 +118,93 @@ public class View extends JFrame implements SimulationObserver {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 }
+
+
+/*
+package Application.View;
+import java.awt.Dimension;
+
+import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
+import Application.Controller.Controller;
+import Application.Model.Model;
+import Application.Observer.Events;
+import Application.Observer.IObserver;
+import Application.Observer.ModelObserver;
+
+import java.awt.*;
+
+public class View extends JFrame implements ModelObserver, IObserver{
+
+    private JPanel controlPanel;
+    private JPanel gasPanel;
+    private Model model;
+
+    private static final int X = 800;
+    private static final int Y = 800;
+    private DrawPanel drawPanel;
+
+    private Controller controller;
+    private JLabel gasLabel = new JLabel("Amount of gas");
+
+    public View(Controller controller, Model model) {
+        this.model = model;
+        this.controller = controller;
+        this.drawPanel = new DrawPanel(X, Y-240, this.model);
+        this.initComponents("Car Application");
+    }
+
+    @Override
+    public void handleEvent(Events.Event e){
+        switch (e) {
+            case UPDATESCREEN:
+                this.update();
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
+    public void update(){
+        this.setVisible(true);
+        this.repaint();
+    }
+
+    private void initComponents(String title) {
+        this.setTitle(title);
+        this.setPreferredSize(new Dimension(X,Y));
+        this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
+
+        this.add(this.drawPanel);
+
+        this.gasPanel = controller.createGasPanel(gasLabel);
+
+        this.add(gasPanel);
+
+        controlPanel = controller.createControlPanel(X);
+
+        this.add(controlPanel);
+        controlPanel.setBackground(Color.CYAN);
+
+        this.add(controller.setupStartButton(X));
+
+        this.add(controller.setupStopButton(X));
+
+
+        // Make the frame pack all it's components by respecting the sizes if possible.
+        this.pack();
+
+        // Get the computer screen resolution
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        // Center the frame
+        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+        // Make the frame visible
+        this.setVisible(true);
+        // Make sure the frame exits when "x" is pressed
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+}
+ */

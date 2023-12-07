@@ -5,8 +5,8 @@ import java.util.List;
 public class Application {
 
     public static void main(String[] args) {
-        VehicleController controller = new VehicleController();
         Model model = new Model();
+        VehicleController controller = new VehicleController(model);
         View view = new View(model, controller);
 
         model.addObserver(view);
