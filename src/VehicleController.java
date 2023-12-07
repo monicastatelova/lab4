@@ -81,7 +81,8 @@ public class VehicleController implements VehicleControllerListener {
         });
     }
 
-    public JButton getGasButton() {
+/*
+    public JButton getGasButton() { //kanske ta bort
         return gasButton;
     }
 

@@ -102,14 +102,14 @@ public class View extends JFrame implements SimulationObserver {
         stopButton.setPreferredSize(new Dimension(WindowConfig.SCREEN_WIDTH/5-15,200)); //**
         this.add(stopButton); //**
 
-        gasButton.addActionListener(e -> controllerListener.gas(getGasAmount()));
-        brakeButton.addActionListener(e -> controllerListener.brake(getGasAmount()));
-        turboOnButton.addActionListener(e -> controllerListener.turboOn());
-        turboOffButton.addActionListener(e -> controllerListener.turboOff());
-        startButton.addActionListener(e -> controllerListener.startAllCars());
-        stopButton.addActionListener(e -> controllerListener.stopAllCars());
-        liftBedButton.addActionListener(e -> controllerListener.liftBed());
-        lowerBedButton.addActionListener(e -> controllerListener.lowerBed());
+        gasButton.addActionListener(e -> model.gas(getGasAmount()));
+        brakeButton.addActionListener(e -> model.brake(getGasAmount()));
+        turboOnButton.addActionListener(e -> model.turboOn());
+        turboOffButton.addActionListener(e -> model.turboOff());
+        startButton.addActionListener(e -> model.startAllCars());
+        stopButton.addActionListener(e -> model.stopAllCars());
+        liftBedButton.addActionListener(e -> model.liftBed());
+        lowerBedButton.addActionListener(e -> model.lowerBed());
 
         // Make the frame pack all it's components by respecting the sizes if possible.
         this.pack();

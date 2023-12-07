@@ -9,7 +9,6 @@ public class Application {
         Model model = new Model();
         View view = new View(model, controller);
 
-        controller.addObserver(model);
         model.addObserver(view);
 
         model.addVehicle(new Volvo240());
