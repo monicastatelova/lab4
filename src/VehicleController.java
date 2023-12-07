@@ -3,9 +3,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 
 public class VehicleController implements VehicleControllerListener {
-    ArrayList<Vehicle> vehicles = new ArrayList<>();
+    private List<Vehicle> vehicles;
+    private Model model;
 
     private JButton gasButton = new JButton("Gas");
     private JButton brakeButton = new JButton("Brake");
@@ -17,6 +19,7 @@ public class VehicleController implements VehicleControllerListener {
     private JButton stopButton = new JButton("Stop all cars");
 
     public VehicleController() {
+        this.vehicles = new ArrayList<>();
         setupEventListeners();
     }
 

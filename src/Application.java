@@ -1,25 +1,21 @@
 import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Application {
 
-    public static final int delay = 50;
-    public static Timer timer = new Timer(delay, new TimerListener());
-    public static TimerListener timerListener;
-    public static VehicleController cc = new VehicleController();
-    public static View frame;
-
     public static void main(String[] args) {
+        VehicleController controller = new VehicleController();
+        Model model = new Model();
+        View view = new View(model, controller);
 
-        cc.vehicles.add(new Volvo240());
-        cc.vehicles.add(new Saab95());
-        cc.vehicles.add(new Scania());
+        controller.addObserver(model);
+        model.addObserver(view);
 
-        frame = new View("CarSim 1.0", cc);
+        model.addVehicle(new Volvo240());
+        model.addVehicle(new Saab95());
+        model.addVehicle(new Scania());
 
-        timerListener = new TimerListener();
-        timerListener.setViewAndViewList(frame, cc.vehicles);
-        timer = new Timer(delay, timerListener);
-
-        timer.start();
+        model.startTimer();
     }
 }

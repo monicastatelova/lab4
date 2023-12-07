@@ -2,12 +2,12 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class View extends JFrame implements SimulationListener{
+public class View extends JFrame implements SimulationObserver {
 
     private final VehicleControllerListener controllerListener;
+
+    private Model model;
 
     private static int gasAmount;
 
@@ -31,9 +31,10 @@ public class View extends JFrame implements SimulationListener{
     JButton stopButton = new JButton("Stop all cars"); //**
 
     // Constructor
-    public View(String framename, VehicleControllerListener controllerListener){
+    public View(Model model, VehicleControllerListener controllerListener){
         this.controllerListener = controllerListener;
-        initComponents(framename);
+        this.model = model;
+        initComponents("Car Application");
     }
 
     static int getGasAmount() {
