@@ -66,21 +66,21 @@ public class View extends JFrame implements SimulationObserver {
         gasSpinner = new JSpinner(spinnerModel); //**
         gasSpinner.addChangeListener(new ChangeListener() { //**
             public void stateChanged(ChangeEvent e) { //**
-                gasAmount = (int) ((JSpinner)e.getSource()).getValue(); //**
+                gasAmount = (int) ((JSpinner)e.getSource()).getValue();//**
 
             }
         });
 
 
-        gasPanel.setLayout(new BorderLayout()); //**
-        gasPanel.add(gasLabel, BorderLayout.PAGE_START); //**
-        gasPanel.add(gasSpinner, BorderLayout.PAGE_END); //**
+        gasPanel.setLayout(new BorderLayout());//**
+        gasPanel.add(gasLabel, BorderLayout.PAGE_START);//**
+        gasPanel.add(gasSpinner, BorderLayout.PAGE_END);//**
 
-        this.add(gasPanel); //**
+        this.add(gasPanel);//**
 
-        controlPanel.setLayout(new GridLayout(2,4));  //**
+        controlPanel.setLayout(new GridLayout(2,4)); //**
 
-        controlPanel.add(gasButton, 0); //**
+        controlPanel.add(gasButton, 0);//**
         controlPanel.add(turboOnButton, 1);//**
         controlPanel.add(liftBedButton, 2);//**
         controlPanel.add(brakeButton, 3);//**
@@ -88,19 +88,19 @@ public class View extends JFrame implements SimulationObserver {
         controlPanel.add(lowerBedButton, 5);//**
         controlPanel.setPreferredSize(new Dimension((WindowConfig.SCREEN_WIDTH/2)+4, 200));//**
         this.add(controlPanel);//**
-        controlPanel.setBackground(Color.CYAN); //**
+        controlPanel.setBackground(Color.CYAN);//**
 
 
-        startButton.setBackground(Color.blue); //**
-        startButton.setForeground(Color.green); //**
+        startButton.setBackground(Color.blue);//**
+        startButton.setForeground(Color.green);//**
         startButton.setPreferredSize(new Dimension(WindowConfig.SCREEN_WIDTH/5-15,200)); //**
         this.add(startButton); //**
 
 
-        stopButton.setBackground(Color.red); //**
-        stopButton.setForeground(Color.black); //**
+        stopButton.setBackground(Color.red);//**
+        stopButton.setForeground(Color.black);//**
         stopButton.setPreferredSize(new Dimension(WindowConfig.SCREEN_WIDTH/5-15,200)); //**
-        this.add(stopButton); //**
+        this.add(stopButton);//**
 
         gasButton.addActionListener(e -> model.gas(getGasAmount()));
         brakeButton.addActionListener(e -> model.brake(getGasAmount()));

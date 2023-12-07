@@ -62,21 +62,21 @@ public class VehicleController implements VehicleControllerListener {
         lowerBedButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                lowerBed();
+                model.lowerBed();
             }
         });
 
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                startAllCars();
+                model.startAllCars();
             }
         });
 
         stopButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                stopAllCars();
+                model.stopAllCars();
             }
         });
     }
