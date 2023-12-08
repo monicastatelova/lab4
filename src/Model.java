@@ -151,4 +151,19 @@ public class Model {
         }
     }
 
+    public void addCar(){
+        if (getNumberOfCars() <10){
+            Vehicle newVehicle = vehicleFactory.createRandomVehicle();
+            addVehicle(newVehicle);
+        }
+
+    }
+
+    public void removeCar(){
+        int lastIndex = vehicles.size() - 1;
+
+        if (lastIndex >= 0) {
+            vehicles.remove(lastIndex);
+        }
+    }
 }
