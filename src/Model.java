@@ -7,9 +7,11 @@ import java.util.List;
 public class Model {
     private final List<Vehicle> vehicles;
     private final List<SimulationObserver> observers;
+    private final VehicleFactory vehicleFactory;
     private Timer timer;
 
     public Model() {
+        this.vehicleFactory = new VehicleFactory();
         this.vehicles = new ArrayList<>();
         this.observers = new ArrayList<>(); //observatörer
         initializeTimer();
@@ -43,6 +45,10 @@ public class Model {
     public void addVehicle(Vehicle vehicle) {
         //Lägger till ett fordon till listan
         vehicles.add(vehicle);
+    }
+
+    private int getNumberOfCars() {
+        return vehicles.size();
     }
 
     public void updateVehiclePositions() {

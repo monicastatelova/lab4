@@ -7,6 +7,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DrawPanel extends JPanel {
+
+    //kolla vilken typ av bil och sedan lägga till bild
+    //position i konstruktor
+    //koppla biltyp till bild
+
     public Map<Position, BufferedImage> imagePositions = new HashMap<>(); //Lagra positioner och bilder för varje fordon
 
     public void moveit(double[] x, double[] y) {
@@ -31,6 +36,14 @@ public class DrawPanel extends JPanel {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+    }
+
+    public void addPosition(){
+
+    }
+
+    public void addImage(){
+
     }
 
     @Override
