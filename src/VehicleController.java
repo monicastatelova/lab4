@@ -14,8 +14,8 @@ public class VehicleController {
     private final JButton startButton = new JButton("Start all cars");
     private final JButton stopButton = new JButton("Stop all cars");
 
-    private final JButton addCarButton = new JButton("Add car");
-    private final JButton removeCarButton =new JButton("Remove Car");
+    private final JButton addVehicleButton = new JButton("Add Vehicle");
+    private final JButton removeVehicleButton =new JButton("Remove Vehicle");
 
     private final SpinnerModel spinnerModel = new SpinnerNumberModel(0, 0, 100, 1);
     private JSpinner gasSpinner;
@@ -40,8 +40,8 @@ public class VehicleController {
         stopButton.addActionListener(e -> model.stopAllCars());
         liftBedButton.addActionListener(e -> model.liftBed());
         lowerBedButton.addActionListener(e -> model.lowerBed());
-        addCarButton.addActionListener(e-> model.addCar()); //lägg till dessa
-        removeCarButton.addActionListener(e-> model.removeCar()); // lägg till detta
+        addVehicleButton.addActionListener(e-> model.addVehicle()); //lägg till dessa
+        removeVehicleButton.addActionListener(e-> model.removeVehicle()); // lägg till detta
 
         gasSpinner.addChangeListener(e -> {
             gasAmount = (int) gasSpinner.getValue();
@@ -59,8 +59,8 @@ public class VehicleController {
         controlPanel.add(brakeButton, 3);
         controlPanel.add(turboOffButton, 4);
         controlPanel.add(lowerBedButton, 5);
-        controlPanel.add(addCarButton, 6);
-        controlPanel.add(removeCarButton, 7);
+        controlPanel.add(addVehicleButton, 6);
+        controlPanel.add(removeVehicleButton, 7);
         controlPanel.setPreferredSize(new Dimension(WindowConfig.SCREEN_WIDTH / 2 + 5, WindowConfig.BUTTON_HEIGHT));
         return controlPanel;
     }

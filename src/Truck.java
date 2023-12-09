@@ -3,8 +3,8 @@ import java.awt.*;
 public abstract class Truck extends Vehicle{
     private boolean isLiftUp;
 
-    public Truck(int nrDoors, double enginePower, Color color, double size, boolean isLiftUp) { //Konstruktor
-        super(nrDoors, enginePower, color, size);
+    public Truck(int nrDoors, double enginePower, Color color, double size, double x, double y, boolean isLiftUp) { //Konstruktor
+        super(nrDoors, enginePower, color, size, x, y);
         this.isLiftUp = false;
     }
 

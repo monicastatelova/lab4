@@ -9,12 +9,12 @@ public abstract class Vehicle implements Movable{
     private Color color; // Color of the car
     private final double size;
 
-    public Vehicle(int nrDoors, double enginePower, Color color, double size){
+    public Vehicle(int nrDoors, double enginePower, Color color, double size, double x, double y) {
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
         this.color = color;
-        this.position = new Position(0, 0, "EAST");
         this.size = size;
+        this.position = new Position(x, y, "EAST");
         stopEngine();
     }
 
@@ -32,6 +32,14 @@ public abstract class Vehicle implements Movable{
 
     public double getXPos() {
         return position.getXPos();
+    }
+
+    public void setXPos(double x) {
+        this.position.setXPos(x);
+    }
+
+    public void setYPos(double y) {
+        this.position.setYPos(y);
     }
 
     public void setPosition(double x, double y, String direction) {
@@ -122,6 +130,4 @@ public abstract class Vehicle implements Movable{
             decrementSpeed(amount);
         }
     }
-
-
 }

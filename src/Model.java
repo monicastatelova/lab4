@@ -9,6 +9,7 @@ public class Model {
     private final List<SimulationObserver> observers;
     private final VehicleFactory vehicleFactory;
     private Timer timer;
+    private double currentY;
 
     public Model() {
         this.vehicleFactory = new VehicleFactory();
@@ -49,6 +50,10 @@ public class Model {
 
     private int getNumberOfCars() {
         return vehicles.size();
+    }
+
+    public List<Vehicle> getVehicleList() {
+        return vehicles;
     }
 
     public void updateVehiclePositions() {
@@ -157,19 +162,20 @@ public class Model {
         }
     }
 
-    public void addCar(){
+    public void addVehicle(){
         if (getNumberOfCars() <10){
-            Vehicle newVehicle = vehicleFactory.createRandomVehicle();
+            Vehicle newVehicle = vehicleFactory.createRandomVehicle(0, currentY);
             addVehicle(newVehicle);
+            currentY += 100;
         }
-
     }
 
-    public void removeCar(){
+    public void removeVehicle(){
         int lastIndex = vehicles.size() - 1;
 
         if (lastIndex >= 0) {
             vehicles.remove(lastIndex);
+            currentY -= 100;
         }
     }
 }

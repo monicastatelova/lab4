@@ -3,56 +3,72 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
+
 
 public class DrawPanel extends JPanel {
 
-    //kolla vilken typ av bil och sedan lägga till bild
-    //position i konstruktor
-    //koppla biltyp till bild
+    private BufferedImage volvo240Image;
+    private BufferedImage saab95Image;
+    private BufferedImage scaniaImage;
+    private Model model;
 
-    public Map<Position, BufferedImage> imagePositions = new HashMap<>(); //Lagra positioner och bilder för varje fordon
-
-    public void moveit(double[] x, double[] y) {
-        //Flyttar fordonens positioner baserat på nya x- och y-koordinater
-        int i = 0;
-        for (Position position : imagePositions.keySet()) {
-            position.setXPos(x[i]);
-            position.setYPos(y[i] + i * 100);
-            i++;
-        }
-    }
-
-    public DrawPanel(int x, int y) {
+    public DrawPanel(int x, int y, Model model) {
+        this.model = model;
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
         this.setBackground(Color.green);
         try {
-            //Lägger till bilder och startposition för varje fordon
-            imagePositions.put(new Position(0, 0, ""), ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg")));
-            imagePositions.put(new Position(0, 100, ""), ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Saab95.jpg")));
-            imagePositions.put(new Position(0, 200, ""), ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Scania.jpg")));
+            volvo240Image = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg"));
+            saab95Image = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Saab95.jpg"));
+            scaniaImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Scania.jpg"));
         } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
 
-    public void addPosition(){
+    public void moveit(double[] xCoordinates, double[] yCoordinates) {
+        List<Vehicle> vehicles = this.model.getVehicleList();
 
-    }
-
-    public void addImage(){
-
+        for (int i = 0; i < this.model.getVehicleList().size(); i++) {
+            Vehicle vehicle = vehicles.get(i);
+            vehicle.setXPos(xCoordinates[i]);
+            vehicle.setYPos(yCoordinates[i]);
+        }
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        //Ritar ut fordonen
-        for (Position position : imagePositions.keySet()) {
-            BufferedImage image = imagePositions.get(position);
-            g.drawImage(image, (int) position.getXPos(), (int) position.getYPos(), null);
+        for (Vehicle vehicle : this.model.getVehicleList()) {
+            BufferedImage image = null;
+
+            if (vehicle instanceof Saab95) {
+                image = getSaab95Image();
+            } else if (vehicle instanceof Volvo240) {
+                image = getVolvo240Image();
+            } else if (vehicle instanceof Scania) {
+                image = getScaniaImage();
+            }
+
+            if (image != null) {
+                g.drawImage(image, (int) vehicle.getXPos(), (int) vehicle.getYPos(), null);
+            } else {
+                System.err.println("Image not found for vehicle: " + vehicle.getClass().getSimpleName());
+            }
         }
     }
+
+    private BufferedImage getSaab95Image() {
+        return saab95Image;
+    }
+
+    private BufferedImage getVolvo240Image() {
+        return volvo240Image;
+    }
+
+    private BufferedImage getScaniaImage() {
+        return scaniaImage;
+    }
+
 }

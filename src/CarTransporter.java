@@ -6,8 +6,8 @@ public class CarTransporter extends Truck{
 
     private final List<Car> loadedCars;
 
-    public CarTransporter() {
-        super(2, 500, Color.green, 20.0, false);
+    public CarTransporter(double x, double y) {
+        super(2, 500, Color.green, 20.0, x, y, false);
         this.loadedCars = new ArrayList<>();
     }
 

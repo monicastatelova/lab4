@@ -10,11 +10,6 @@ public class Application {
         View view = new View(model, controller);
 
         model.addObserver(view);
-
-        model.addVehicle(new Volvo240());
-        model.addVehicle(new Saab95());
-        model.addVehicle(new Scania());
-
         model.startTimer();
     }
 }

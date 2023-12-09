@@ -4,14 +4,16 @@ import java.awt.*;
 public class View extends JFrame implements SimulationObserver {
     private final VehicleController controller;
     private final DrawPanel drawPanel;
+
     private final JLabel gasLabel = new JLabel("Amount of gas");
 
     public View(Model model, VehicleController controller){
         this.controller = controller;
         //Initialiserar en panel med dimensioner för att rita fordonen
-        this.drawPanel = new DrawPanel(WindowConfig.SCREEN_WIDTH, WindowConfig.SCREEN_HEIGHT - WindowConfig.BUTTON_HEIGHT);
+        this.drawPanel = new DrawPanel(WindowConfig.SCREEN_WIDTH, WindowConfig.SCREEN_HEIGHT - WindowConfig.BUTTON_HEIGHT, model);
         //Initialiserar komponenterna i gränssnittet
         initComponents("Vehicle Simulation");
+        model.addObserver(this); //utan denna inte kontrollera fordon
     }
 
     @Override
