@@ -1,5 +1,6 @@
 import MainApplication.Model.Vehicles.Volvo240;
 import org.junit.Test;
+import static org.junit.Assert.*;
 
 
 public class VolvoTest {

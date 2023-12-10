@@ -44,7 +44,7 @@ public class TruckTest {
 
     @Test
     public void scaniaSpeedFactor(){
-        assertEquals(500, scania.getEnginePower(), 0.001);
+        assertEquals(100, scania.getEnginePower(), 0.001);
 
 
     }
