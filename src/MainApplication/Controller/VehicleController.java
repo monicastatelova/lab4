@@ -1,3 +1,8 @@
+package MainApplication.Controller;
+
+import MainApplication.Model.Model;
+import MainApplication.*;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -10,12 +15,12 @@ public class VehicleController {
     private final JButton turboOnButton = new JButton("Saab Turbo on");
     private final JButton turboOffButton = new JButton("Saab Turbo off");
     private final JButton liftBedButton = new JButton("Scania Lift Bed");
-    private final JButton lowerBedButton = new JButton("Lower Lift Bed");
+    private final JButton lowerBedButton = new JButton("Scania Lower Bed");
     private final JButton startButton = new JButton("Start all cars");
     private final JButton stopButton = new JButton("Stop all cars");
 
-    private final JButton addVehicleButton = new JButton("Add Vehicle");
-    private final JButton removeVehicleButton =new JButton("Remove Vehicle");
+    private final JButton addVehicleButton = new JButton("Add Vehicles");
+    private final JButton removeVehicleButton =new JButton("Remove Vehicles");
 
     private final SpinnerModel spinnerModel = new SpinnerNumberModel(0, 0, 100, 1);
     private JSpinner gasSpinner;
@@ -56,10 +61,10 @@ public class VehicleController {
         controlPanel.add(gasButton, 0);
         controlPanel.add(turboOnButton, 1);
         controlPanel.add(liftBedButton, 2);
-        controlPanel.add(brakeButton, 3);
-        controlPanel.add(turboOffButton, 4);
-        controlPanel.add(lowerBedButton, 5);
-        controlPanel.add(addVehicleButton, 6);
+        controlPanel.add(addVehicleButton, 3);
+        controlPanel.add(brakeButton, 4);
+        controlPanel.add(turboOffButton, 5);
+        controlPanel.add(lowerBedButton, 6);
         controlPanel.add(removeVehicleButton, 7);
         controlPanel.setPreferredSize(new Dimension(WindowConfig.SCREEN_WIDTH / 2 + 5, WindowConfig.BUTTON_HEIGHT));
         return controlPanel;

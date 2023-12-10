@@ -1,3 +1,10 @@
+package MainApplication.Model;
+
+import MainApplication.Model.Vehicles.Saab95;
+import MainApplication.Model.Vehicles.Scania;
+import MainApplication.Model.Vehicles.Vehicle;
+import MainApplication.Model.Vehicles.Volvo240;
+
 import java.util.Random;
 
 public class VehicleFactory {

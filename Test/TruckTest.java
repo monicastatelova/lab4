@@ -1,9 +1,10 @@
+import MainApplication.Model.Vehicles.Scania;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class TruckTest {
 
-    private Scania scania = new Scania();
+    private Scania scania = new Scania(0,0);
 
 
 

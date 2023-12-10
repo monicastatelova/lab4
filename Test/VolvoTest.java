@@ -1,10 +1,10 @@
+import MainApplication.Model.Vehicles.Volvo240;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 
 public class VolvoTest {
 
-    private Volvo240 volvo = new Volvo240();
+    private Volvo240 volvo = new Volvo240(0,0);
 
     @Test
     public void volvoCheckSpeedFactor(){

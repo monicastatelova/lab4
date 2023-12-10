@@ -1,3 +1,7 @@
+import MainApplication.Model.CarWorkshop;
+import MainApplication.Model.Vehicles.Car;
+import MainApplication.Model.Vehicles.Saab95;
+import MainApplication.Model.Vehicles.Volvo240;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -11,9 +15,9 @@ public class CarWorkshopTest {
     private CarWorkshop<Saab95> saabWorkshop = new CarWorkshop<>(1);
     private CarWorkshop<Car> workshop = new CarWorkshop<>(2);
 
-    private Volvo240 volvo = new Volvo240();
-    private Volvo240 volvo2 = new Volvo240();
-    private Saab95 saab = new Saab95();
+    private Volvo240 volvo = new Volvo240(0,0);
+    private Volvo240 volvo2 = new Volvo240(0,0);
+    private Saab95 saab = new Saab95(0,0);
 
     @Test
     public void loadVolvo240InVolvo240Workshop(){

@@ -1,10 +1,12 @@
+package MainApplication.Model.Vehicles;
+
 import java.awt.*;
 
-public class Scania extends Truck{
+public class Scania extends Truck {
     private double angleLift;
 
     public Scania(double x, double y){
-        super(2, 500, Color.blue, 25, x, y, false);
+        super(2, 100, Color.blue, 25, x, y, false);
         this.angleLift = angleLift;
     }
 

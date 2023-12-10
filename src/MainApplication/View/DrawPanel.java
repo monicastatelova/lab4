@@ -1,3 +1,11 @@
+package MainApplication.View;
+
+import MainApplication.Model.Vehicles.Saab95;
+import MainApplication.Model.Vehicles.Scania;
+import MainApplication.Model.Vehicles.Vehicle;
+import MainApplication.Model.Vehicles.Volvo240;
+import MainApplication.Model.Model;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -19,9 +27,9 @@ public class DrawPanel extends JPanel {
         this.setPreferredSize(new Dimension(x, y));
         this.setBackground(Color.green);
         try {
-            volvo240Image = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg"));
-            saab95Image = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Saab95.jpg"));
-            scaniaImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Scania.jpg"));
+            volvo240Image = ImageIO.read(DrawPanel.class.getResourceAsStream("/MainApplication/View/pics/Volvo240.jpg"));
+            saab95Image = ImageIO.read(DrawPanel.class.getResourceAsStream("/MainApplication/View/pics/Saab95.jpg"));
+            scaniaImage = ImageIO.read(DrawPanel.class.getResourceAsStream("/MainApplication/View/pics/Scania.jpg"));
         } catch (IOException ex) {
             ex.printStackTrace();
         }

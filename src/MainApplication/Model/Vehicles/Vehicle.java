@@ -1,6 +1,11 @@
+package MainApplication.Model.Vehicles;
+
+import MainApplication.Model.Position;
+import MainApplication.Model.Movable;
+
 import java.awt.*;
 
-public abstract class Vehicle implements Movable{
+public abstract class Vehicle implements Movable {
 
     private final Position position;
     private final int nrDoors; // Number of doors on the car
@@ -42,11 +47,10 @@ public abstract class Vehicle implements Movable{
         this.position.setYPos(y);
     }
 
-    public void setPosition(double x, double y, String direction) {
-        this.position.setXPos(x);
-        this.position.setYPos(y);
-        this.position.setDirection(direction);
+    public void setDirection(String newDirection) {
+        this.position.setDirection(newDirection);
     }
+
     public double getSize(){
         return size;
     }

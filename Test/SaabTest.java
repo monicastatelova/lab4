@@ -1,12 +1,13 @@
+import MainApplication.Model.Vehicles.Saab95;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class SaabTest {
-    public Saab95 saab = new Saab95();
+    public Saab95 saab = new Saab95(0,0);
 
     @Test
     public void setTurboOnSaab(){
-        // Testar att sätta turbo-läget på Saab95 och kontrollera att det är på
+        // Testar att sätta turbo-läget på Vehicles.Saab95 och kontrollera att det är på
         saab.setTurboOn();
         assertTrue(saab.isTurboOn());
     }

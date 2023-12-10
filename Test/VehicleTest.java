@@ -1,10 +1,11 @@
+import MainApplication.Model.Vehicles.Saab95;
 import org.junit.Test;
 import java.awt.*;
 import static org.junit.Assert.*;
 
 public class VehicleTest {
 
-    private Saab95 saab = new Saab95();
+    private Saab95 saab = new Saab95(0,0);
 
 
     @Test
@@ -129,8 +130,10 @@ public class VehicleTest {
 
     @Test
     public void setAndGetPositions() {
-        saab.setPosition(1.0, 1.0, "SOUTH");
-        assertEquals(1.0, saab.getXPos(), 0.001);
+        saab.setXPos(1.0);
+        saab.setYPos(1.0);
+        saab.setDirection("SOUTH");
+        assertEquals(1.0, saab.getYPos(), 0.001);
         assertEquals(1.0, saab.getXPos(), 0.001);
         assertEquals("SOUTH", saab.getDirection());
     }

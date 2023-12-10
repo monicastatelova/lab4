@@ -1,15 +1,18 @@
+import MainApplication.Model.Vehicles.CarTransporter;
+import MainApplication.Model.Vehicles.Saab95;
+import MainApplication.Model.Vehicles.Volvo240;
 import org.junit.Test;
-import java.awt.*;
+
 import static org.junit.Assert.*;
 
 public class CarTransporterTest {
 
-    private CarTransporter carTransporter = new CarTransporter();
-    private Saab95 carToLoad = new Saab95(); //4.8
-    private Volvo240 secondCarToLoad = new Volvo240(); //4.9
-    private Volvo240 thirdCarToLoad = new Volvo240(); //4.9
-    private Volvo240 forthCartoLoad = new Volvo240(); //4.9
-    private Volvo240 fifthCarToLoad = new Volvo240(); //4.9
+    private CarTransporter carTransporter = new CarTransporter(0,0);
+    private Saab95 carToLoad = new Saab95(0,0); //4.8
+    private Volvo240 secondCarToLoad = new Volvo240(0,0); //4.9
+    private Volvo240 thirdCarToLoad = new Volvo240(0,0); //4.9
+    private Volvo240 forthCartoLoad = new Volvo240(0,0); //4.9
+    private Volvo240 fifthCarToLoad = new Volvo240(0,0); //4.9
 
     @Test
     public void testLowerRampWhenNotMoving(){

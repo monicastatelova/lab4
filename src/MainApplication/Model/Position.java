@@ -1,3 +1,5 @@
+package MainApplication.Model;
+
 public class Position {
     private String direction;
     private double xPos;

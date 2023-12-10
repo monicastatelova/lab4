@@ -1,6 +1,8 @@
-import javax.swing.*;
-import java.util.ArrayList;
-import java.util.List;
+package MainApplication;
+
+import MainApplication.Controller.VehicleController;
+import MainApplication.Model.Model;
+import MainApplication.View.View;
 
 public class Application {
 

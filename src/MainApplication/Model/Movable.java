@@ -1,3 +1,5 @@
+package MainApplication.Model;
+
 public interface Movable {
     void move();
 

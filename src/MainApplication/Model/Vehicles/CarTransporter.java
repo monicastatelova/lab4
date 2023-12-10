@@ -1,8 +1,10 @@
+package MainApplication.Model.Vehicles;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CarTransporter extends Truck{
+public class CarTransporter extends Truck {
 
     private final List<Car> loadedCars;
 
@@ -45,14 +47,18 @@ public class CarTransporter extends Truck{
     public void loadCar(Car car) {
         if (!getIsLiftUp() && isCarClose(car) && isCarTheRightSize(car)) {
             loadedCars.add(car);
-            car.setPosition(getXPos(), getYPos(),getDirection());
+            car.setXPos(getXPos());
+            car.setYPos(getYPos());
+            car.setDirection(getDirection());
         }
     }
 
     public void unloadCar() {
         if (!getIsLiftUp() && !loadedCars.isEmpty()) {
             Car lastCar = loadedCars.remove(loadedCars.size() - 1);
-            lastCar.setPosition((getXPos() + 1), (getYPos() + 1), getDirection());
+            lastCar.setXPos(getXPos() + 1);
+            lastCar.setYPos(getYPos() + 1);
+            lastCar.setDirection(getDirection());
         }
     }
 

@@ -1,6 +1,8 @@
+package MainApplication.Model.Vehicles;
+
 import java.awt.*;
 
-public class Volvo240 extends Car{
+public class Volvo240 extends Car {
 
     private final static double trimFactor = 1.2;
 

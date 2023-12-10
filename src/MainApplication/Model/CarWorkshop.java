@@ -1,7 +1,11 @@
+package MainApplication.Model;
+
+import MainApplication.Model.Vehicles.Car;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class CarWorkshop <T extends Car>{//T är av typen Car
+public class CarWorkshop <T extends Car>{//T är av typen Vehicles.Car
 
     private final int maxCapacity;
     private final List<T> carsInWorkshop;

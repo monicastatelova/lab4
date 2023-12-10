@@ -1,6 +1,8 @@
+package MainApplication.Model.Vehicles;
+
 import java.awt.*;
 
-public abstract class Truck extends Vehicle{
+public abstract class Truck extends Vehicle {
     private boolean isLiftUp;
 
     public Truck(int nrDoors, double enginePower, Color color, double size, double x, double y, boolean isLiftUp) { //Konstruktor

@@ -1,3 +1,11 @@
+package MainApplication.View;
+
+
+import MainApplication.Controller.VehicleController;
+import MainApplication.Model.Model;
+import MainApplication.Observer.SimulationObserver;
+import MainApplication.WindowConfig;
+
 import javax.swing.*;
 import java.awt.*;
 

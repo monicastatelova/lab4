@@ -1,3 +1,11 @@
+package MainApplication.Model;
+
+import MainApplication.Model.Vehicles.Saab95;
+import MainApplication.Model.Vehicles.Truck;
+import MainApplication.Model.Vehicles.Vehicle;
+import MainApplication.WindowConfig;
+import MainApplication.Observer.SimulationObserver;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
